@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dragon-warning
+  namespace: stage
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dragon-warning
+  template:
+    metadata:
+      labels:
+        app: dragon-warning
+    spec:
+      containers:
+        - name: dragon-warning
+          image: public.ecr.aws/h9d1c2c8/dragon-warning-public:latest
+          ports:
+            - containerPort: 80
+          command:
+            - /bin/sleep
+            - 3650d
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 0
+      maxSurge: 1
+  progressDeadlineSeconds: 600
