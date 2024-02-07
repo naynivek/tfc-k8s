@@ -1,0 +1,36 @@
+kubectl describe deployment dragon-warning -n stage
+Name:                   dragon-warning
+Namespace:              stage
+CreationTimestamp:      Fri, 02 Feb 2024 14:00:48 -0300
+Labels:                 k8slens-edit-resource-version=v1
+Annotations:            deployment.kubernetes.io/revision: 8
+Selector:               app=dragon-warning
+Replicas:               1 desired | 1 updated | 1 total | 1 available | 0 unavailable
+StrategyType:           RollingUpdate
+MinReadySeconds:        0
+RollingUpdateStrategy:  0 max unavailable, 1 max surge
+Pod Template:
+  Labels:       app=dragon-warning
+  Annotations:  kubectl.kubernetes.io/restartedAt: 2024-02-07T16:06:59Z
+  Containers:
+   dragon-warning:
+    Image:        public.ecr.aws/h9d1c2c8/dragon-warning-public:latest
+    Port:         80/TCP
+    Host Port:    0/TCP
+    Environment:  <none>
+    Mounts:       <none>
+  Volumes:        <none>
+Conditions:
+  Type           Status  Reason
+  ----           ------  ------
+  Available      True    MinimumReplicasAvailable
+  Progressing    True    NewReplicaSetAvailable
+OldReplicaSets:  <none>
+NewReplicaSet:   dragon-warning-86d7fdcd87 (1/1 replicas created)
+Events:
+  Type    Reason             Age                  From                   Message
+  ----    ------             ----                 ----                   -------
+  Normal  ScalingReplicaSet  16m                  deployment-controller  Scaled up replica set dragon-warning-564866c4d9 to 1
+  Normal  ScalingReplicaSet  3m48s (x2 over 80m)  deployment-controller  Scaled up replica set dragon-warning-86d7fdcd87 to 1
+  Normal  ScalingReplicaSet  3m48s                deployment-controller  Scaled down replica set dragon-warning-564866c4d9 to 0
+  Normal  ScalingReplicaSet  3m40s                deployment-controller  Scaled down replica set dragon-warning-798bd786f5 to 0
